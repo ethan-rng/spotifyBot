@@ -12,23 +12,24 @@ class Downloader:
 
     def downloadMusic(self):
         for i in range(len(self.request.getPlaylist()["Songs"])):
-            song = self.request.getPlaylist()["Songs"][i]
             _song = self.request._getPlaylist()["Songs"][i]
 
             if not _song.checkMaster():
+                # Rename File Path
+                currFilePath = f'{os.getcwd()}/music/master/{_song.getSong()["title"]} | {_song.getSong()["artist"]}.mp4'
+                newFilePath = currFilePath[:-4] + ".mp3"
+
                 # Downloads Musics
                 yt = YouTube(_song.getSong()["youtubeLink"])
                 video = yt.streams.filter(only_audio=True).first()
-                video.download(f"{os.getcwd()}/music/master")
+                video.download(f"{os.getcwd()}/music/master", filename=currFilePath[:-4])
+
                 print(_song.getSong()["artist"] + " " + _song.getSong()["title"])
 
                 # Add Song to master.json
                 _song.addSong()
 
-                # Rename File Path and Convert to mp3
-                currFilePath = f"{os.getcwd()}/music/master/{yt._title}.mp4"
-                newFilePath = f'{os.getcwd()}/music/master/{_song.getSong()["title"]} | {_song.getSong()["artist"]}.mp3'
-
+                # Converts to mp3
                 clip = AudioFileClip(currFilePath)
                 clip.write_audiofile(newFilePath)
                 clip.close()
@@ -43,6 +44,7 @@ class Downloader:
 
 
 if __name__ == "__main__":
-    p = Playlist("https://open.spotify.com/playlist/1F8BHx4c6QBXiGEuDmhgmP")
+    link = "https://open.spotify.com/playlist/1F8BHx4c6QBXiGEuDmhgmP"
+    p = Playlist("https://open.spotify.com/playlist/5e8p93Fnh69ezBz2NIkY9t")
     d = Downloader(p)
     d.downloadMusic()

@@ -1,13 +1,6 @@
 {
     "Songs": [
         {
-            "title": "Sandstorm",
-            "artist": "Darude",
-            "youtubeLink": "https://www.youtube.com/watch?v=FDa4-ymryuA",
-            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/Sandstorm-Darude.mp3",
-            "image": "https://i.scdn.co/image/ab67616d0000b273f9ef39657ba18c612641ee6d"
-        },
-        {
             "title": "Baby Shark",
             "artist": "Pinkfong",
             "youtubeLink": "https://www.youtube.com/watch?v=g5pJfgxDWpw",
@@ -27,6 +20,27 @@
             "youtubeLink": "https://www.youtube.com/watch?v=In03wnfyVqc",
             "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/Never Gonna Give You Up | Rick Astley.mp3",
             "image": "https://i.scdn.co/image/ab67616d0000b273baf89eb11ec7c657805d2da0"
+        },
+        {
+            "title": "maybe we need a break",
+            "artist": "slchld",
+            "youtubeLink": "https://www.youtube.com/watch?v=MOGORrUJn5Q",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/maybe we need a break | slchld.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b27361d39fb9861e85ebc52a4d62"
+        },
+        {
+            "title": "less of you",
+            "artist": "keshi",
+            "youtubeLink": "https://www.youtube.com/watch?v=mtoeTzYKyaQ",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/less of you | keshi.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b2737941a79c3108cedb1667b68d"
+        },
+        {
+            "title": "2 soon",
+            "artist": "keshi",
+            "youtubeLink": "https://www.youtube.com/watch?v=6P_w0adSpYU",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/2 soon | keshi.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b273c3c387d65d710a1909ad410d"
         }
     ]
 }
