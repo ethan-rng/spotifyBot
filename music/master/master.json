@@ -1,0 +1,32 @@
+{
+    "Songs": [
+        {
+            "title": "Sandstorm",
+            "artist": "Darude",
+            "youtubeLink": "https://www.youtube.com/watch?v=FDa4-ymryuA",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/Sandstorm-Darude.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b273f9ef39657ba18c612641ee6d"
+        },
+        {
+            "title": "Baby Shark",
+            "artist": "Pinkfong",
+            "youtubeLink": "https://www.youtube.com/watch?v=g5pJfgxDWpw",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/Baby Shark-Pinkfong.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b27311723f2867f29b2134ae47e4"
+        },
+        {
+            "title": "Sandstorm",
+            "artist": "Darude",
+            "youtubeLink": "https://www.youtube.com/watch?v=FDa4-ymryuA",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/Sandstorm | Darude.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b273f9ef39657ba18c612641ee6d"
+        },
+        {
+            "title": "Never Gonna Give You Up",
+            "artist": "Rick Astley",
+            "youtubeLink": "https://www.youtube.com/watch?v=In03wnfyVqc",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/Never Gonna Give You Up | Rick Astley.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b273baf89eb11ec7c657805d2da0"
+        }
+    ]
+}

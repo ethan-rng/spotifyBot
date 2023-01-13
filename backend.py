@@ -1,110 +1,48 @@
 import os
-import spotipy
-from spotipy.oauth2 import SpotifyOAuth
-import config
+from moviepy.audio.io.AudioFileClip import AudioFileClip
 from pytube import YouTube
-from googleapiclient.discovery import build
-import json
+from playlist import Playlist
 
 # pip install --upgrade google-api-python-client
-
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=config.sptfy_ID, client_secret=config.sptfy_API_KEY,
-                                               redirect_uri="http://localhost:9000", scope="user-read-recently-played"))
-
-
-def getVideoID(artist, song, API_KEY=config.yt_API_KEY, searchTerm="audio only"):
-    # Making Call to YouTube API
-    with build("youtube", "v3", developerKey=API_KEY) as service:
-        req = service.search().list(
-            part="snippet",
-            q=f"{artist} {song} {searchTerm}",
-            type="video",
-        )
-        response = req.execute()
-    print(response)
-    return f'https://www.youtube.com/watch?v={response["items"][0]["id"]["videoId"]}'
-
-
-class Download:
-    def __init__(self):
-        pass
-
-
-class SpotifyScraper:
-    def __init__(self, playlistLink):
-        """
-            {
-              "Title" : "Playlist1",
-              "Link" : "https://spotifyLink",
-              "Songs" : [
-                {
-                  "title" : "Hot Line Bling",
-                  "artist" : "Drake",
-                  "youtubeLink" : ""
-                },
-                {
-                  "title" : "Hot Line Bling",
-                  "artist" : "Drake",
-                  "youtubeLink" : ""
-                }
-              ],
-            }
-        """
-        self.playlistLink = playlistLink
-        self.songs = []
-
-    def getSpotifyData(self):
-        # playlist[34: ] returns playlist ID
-        JSONResponse = sp.playlist(self.playlistLink[34:])
-        for song in JSONResponse["tracks"]["items"]:
-            self.songs.append({
-                "title": song["track"]["name"],
-                "artist": song["track"]["artists"][0]["name"],
-                "youtubeLink": getVideoID(song["track"]["artists"][0]["name"], song["track"]["name"])
-            })
-
-        return self.songs
 
 
 class Downloader:
     def __init__(self, playlist):
-        self.request = playlist.JSONObject
+        self.request = playlist
 
     def downloadMusic(self):
-        for song in self.request["Songs"]:
-            yt = YouTube(song["youtubeLink"])
-            video = yt.streams.filter(only_audio=True).first()
-            video.download(f"{os.getcwd()}/playlist")
-            print(song["artist"] + " " + song["title"])
+        for i in range(len(self.request.getPlaylist()["Songs"])):
+            song = self.request.getPlaylist()["Songs"][i]
+            _song = self.request._getPlaylist()["Songs"][i]
 
+            if not _song.checkMaster():
+                # Downloads Musics
+                yt = YouTube(_song.getSong()["youtubeLink"])
+                video = yt.streams.filter(only_audio=True).first()
+                video.download(f"{os.getcwd()}/music/master")
+                print(_song.getSong()["artist"] + " " + _song.getSong()["title"])
 
-class Playlist:
-    def __init__(self, link=None, filePath=None):
-        if link is not None:  # loads from link
-            title = sp.playlist(link[34:])["name"]
-            songs = SpotifyScraper(link).getSpotifyData()
+                # Add Song to master.json
+                _song.addSong()
 
-        elif filePath is not None:  # loads from pre-existing JSON File
-            with open(f"{os.getcwd()}/playlist/{filePath}") as file:
-                data = json.load(file)
+                # Rename File Path and Convert to mp3
+                currFilePath = f"{os.getcwd()}/music/master/{yt._title}.mp4"
+                newFilePath = f'{os.getcwd()}/music/master/{_song.getSong()["title"]} | {_song.getSong()["artist"]}.mp3'
 
-            title = data["Title"]
-            link = data["Link"]
-            songs = data["Songs"]
+                clip = AudioFileClip(currFilePath)
+                clip.write_audiofile(newFilePath)
+                clip.close()
 
-        self.JSONObject = {
-            "Title": title,
-            "Link": link,
-            "Path": filePath,
-            "Songs": songs,
-        }
+                os.remove(currFilePath)
 
-        Downloader(self).downloadMusic()
+        # Add Playlist to masterPlaylist
+        self.request.addPlaylist()
 
-    def saveJSONFile(self):
-        pass
+        # Returns with new data
+        return self.request
 
 
 if __name__ == "__main__":
-    p = Playlist("https://open.spotify.com/playlist/5QwFq7iyLNBgcwxbhNOORE")
-    print(p.JSONObject)
+    p = Playlist("https://open.spotify.com/playlist/1F8BHx4c6QBXiGEuDmhgmP")
+    d = Downloader(p)
+    d.downloadMusic()
