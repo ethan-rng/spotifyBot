@@ -22,7 +22,7 @@ class Downloader:
                 # Downloads Musics
                 yt = YouTube(_song.getSong()["youtubeLink"])
                 video = yt.streams.filter(only_audio=True).first()
-                video.download(f"{os.getcwd()}/music/master", filename=currFilePath[:-4])
+                video.download(f"{os.getcwd()}/music/master", filename=currFilePath)
 
                 print(_song.getSong()["artist"] + " " + _song.getSong()["title"])
 
@@ -44,7 +44,7 @@ class Downloader:
 
 
 if __name__ == "__main__":
-    link = "https://open.spotify.com/playlist/1F8BHx4c6QBXiGEuDmhgmP"
-    p = Playlist("https://open.spotify.com/playlist/5e8p93Fnh69ezBz2NIkY9t")
+    link = "https://open.spotify.com/playlist/5NNCx2HDqcxEzjpa1lcdKA"
+    p = Playlist(link)
     d = Downloader(p)
     d.downloadMusic()

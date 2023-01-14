@@ -13,14 +13,9 @@ class Song:
         self.masterPath = masterPath
 
     def __repr__(self):
-        return f"{self.title}"
+        return f"{self.title} {self.artist}"
 
     def __eq__(self, other):
-        print(self, other)
-        print(self.title, other.title)
-        print(self.artist, other.artist)
-        print(self.youtubeLink, other.youtubeLink)
-
         if (self.title == other.title and self.artist == other.artist) or (self.youtubeLink == other.youtubeLink):
             return True
 
@@ -44,17 +39,19 @@ class Song:
 
         return master
 
-    def checkMaster(self):
+    def checkMaster(self, returnSong=False):
         master = self.getMaster()
 
         # We do this because not all the things matters
         print(master["Songs"])
-        for i in range(len(list(master["Songs"]))):
-            song = list(master["Songs"])[i]
-            print(i)
+        for song in master["Songs"]:
             if Song(self.getSong()) == Song(song):
                 print("True")
-                return True
+
+                if returnSong:
+                    return Song(song)
+                else:
+                    return True
         return False
 
     def addSong(self):

@@ -1,0 +1,49 @@
+{
+    "Title": "\ud83d\udcda",
+    "Link": "https://open.spotify.com/playlist/5e8p93Fnh69ezBz2NIkY9t",
+    "Image": "https://i.scdn.co/image/ab67706c0000bebba7508c3b9bfc1ac9699f519e",
+    "Songs": [
+        {
+            "title": "maybe we need a break",
+            "artist": "slchld",
+            "youtubeLink": "https://www.youtube.com/watch?v=MOGORrUJn5Q",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/maybe we need a break | slchld.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b27361d39fb9861e85ebc52a4d62"
+        },
+        {
+            "title": "less of you",
+            "artist": "keshi",
+            "youtubeLink": "https://www.youtube.com/watch?v=mtoeTzYKyaQ",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/less of you | keshi.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b2737941a79c3108cedb1667b68d"
+        },
+        {
+            "title": "2 soon",
+            "artist": "keshi",
+            "youtubeLink": "https://www.youtube.com/watch?v=6P_w0adSpYU",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/2 soon | keshi.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b273c3c387d65d710a1909ad410d"
+        },
+        {
+            "title": "drunk",
+            "artist": "keshi",
+            "youtubeLink": "https://www.youtube.com/watch?v=4HLumkaPcCI",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/drunk | keshi.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b273563944da62812cc5c6e2fe6f"
+        },
+        {
+            "title": "May I Ask",
+            "artist": "Luke Chiang",
+            "youtubeLink": "https://www.youtube.com/watch?v=LXjJeIWJzW4",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/May I Ask | Luke Chiang.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b273e83b76df2c7d6dd1c6a6d55c"
+        },
+        {
+            "title": "skeletons",
+            "artist": "keshi",
+            "youtubeLink": "https://www.youtube.com/watch?v=2U5wNk-fbew",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/skeletons | keshi.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b27344ce5e5926e0d277b70f0bd5"
+        }
+    ]
+}

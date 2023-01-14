@@ -11,13 +11,24 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=config.sptfy_ID,
                                                redirect_uri="http://localhost:9000",
                                                scope="user-read-recently-played"))
 
+masterPath = f"{os.getcwd()}/music/master/master.json"
 
-def getVideoID(artist, song, API_KEY=config.yt_API_KEY, searchTerm="audio only"):
+
+def getVideoID(artist, songTitle, API_KEY=config.yt_API_KEY, searchTerm="audio only"):
+    # Checking master first
+    with open(masterPath, "r") as masterJSONFile:
+        master = json.load(masterJSONFile)
+
+    for song in master["Songs"]:
+        if str(Song(song)) == f"{songTitle} {artist}":
+            print("adfadf" + song["youtubeLink"])
+            return song["youtubeLink"]
+
     # Making Call to YouTube API
     with build("youtube", "v3", developerKey=API_KEY) as service:
         req = service.search().list(
             part="snippet",
-            q=f"{artist} {song} {searchTerm}",
+            q=f"{artist} {songTitle} {searchTerm}",
             type="video",
         )
         response = req.execute()
@@ -125,5 +136,5 @@ class Playlist:
         json_object = json.dumps(self.getPlaylist(), indent=4)
 
         # Writing to sample.json
-        with open(f"{os.getcwd()}/music/masterPlaylist/{self.Title}.json", "w") as JSONOutfile:
+        with open(f"{os.getcwd()}/music/masterPlaylist/{self.Link[34:]}.json", "w") as JSONOutfile:
             JSONOutfile.write(json_object)

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Jankify
+{% endblock %}
+
+{% block content %}
+    {% for playlist in masterPlaylist %}
+        <span>
+            <a href="/{{ playlist['Link'][34:] }}">
+                <img src="{{ playlist['Image'] }}" width="60" height="60">
+                <h2> {{ playlist["Title"] }} </h2>
+            </a>
+        </span>
+        <a href="{{ playlist['Link'] }}"> <h2> {{ playlist["Link"] }} </h2> </a>
+        <hr>
+    {% endfor %}
+{% endblock %}
