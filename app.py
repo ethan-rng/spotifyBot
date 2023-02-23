@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template, send_from_directory, url_for
 import os
 import json
 
@@ -40,10 +40,14 @@ def playlistID(playlistID):
     return render_template("soloPlaylist.html", playlist=playlist)
 
 
+@app.route("/<playlistID>")
+def sendMP3File(playlistID):
+    return send_from_directory("/", playlistID)
+
 @app.route("/addPlaylist")
 def addPlaylist():
     return render_template("addPlaylist.html")
 
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=8080, debug=True)
+    app.run(host="localhost", port=3000, debug=True)

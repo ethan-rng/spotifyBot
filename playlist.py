@@ -67,8 +67,8 @@ class SpotifyScraper:
     def getSpotifyData(self):
         # music[34: ] returns music ID
         JSONResponse = sp.playlist(self.playlistLink[34:])
-        print(JSONResponse)
 
+        print(JSONResponse)
         for song in JSONResponse["tracks"]["items"]:
             self.songs.append(Song({
                 "title": song["track"]["name"],
@@ -77,7 +77,6 @@ class SpotifyScraper:
                 "image": song["track"]["album"]["images"][0]["url"],
                 "path": f'{os.getcwd()}/music/master/{song["track"]["name"]} | {song["track"]["artists"][0]["name"]}.mp3'
             }))
-        print(self.songs)
         return self.songs, JSONResponse["images"][0]["url"]
 
 

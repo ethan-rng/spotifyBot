@@ -6,12 +6,12 @@
 
 {% block content %}
 <h1>
-    Welcome to my shitty landing page
+    Welcome to Your Music Library's Landing Page
 </h1>
 <br>
 
 <h1>
-All Your Illegally Downloaded Music <br>
+All Your Downloaded Music <br>
 </h1>
 
 {% for song in master["Songs"] %}
@@ -20,8 +20,8 @@ All Your Illegally Downloaded Music <br>
             <img src="{{ song['image'] }}" width="80" height="80">
             <h2> {{ song["title"] }} by {{ song["artist"] }} </h2>
             <h3> {{song["path"]}} </h3>
-            <audio controls autoplay muted>
-                <source src=' {{ url_for("static/hi", filename=song["title"] + " | "+ song["artist"]) + ".mp3" }}' type="audio/mpeg">
+            <audio controls>
+                <source src='{{ url_for("static", filename=song["title"] + " | " + song["artist"] + ".mp3") }}' type="audio/mpeg">
                 Your browser does not support the audio element.
              </audio>
 

@@ -8,11 +8,6 @@
     <a href="{{ playlist['Link'] }}">
         <h1>{{ playlist["Title"] }}</h1>
     </a>
-    <span>
-        <button type="button">Shuffle Play</button>
-        <button type="button">Pause</button>
-        <button type="button">Next</button>
-    </span>
 
     {% for song in playlist["Songs"] %}
         <div>
@@ -21,7 +16,7 @@
             <h2> {{ song["title"] }} by {{ song["artist"] }} </h2>
             <h3> {{song["path"]}} </h3>
             <audio controls autoplay muted>
-                <source src="" type="audio/mpeg">
+                <source src=' {{ url_for("static", filename=song["title"] + " | " + song["artist"] + ".mp3") }} ' type="audio/mpeg">
                 Your browser does not support the audio element.
              </audio>
 

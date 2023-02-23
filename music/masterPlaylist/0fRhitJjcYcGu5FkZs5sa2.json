@@ -1,0 +1,28 @@
+{
+    "Title": "My Playlist #16",
+    "Link": "https://open.spotify.com/playlist/0fRhitJjcYcGu5FkZs5sa2",
+    "Image": "https://i.scdn.co/image/ab67616d0000b273edf5b257be1d6593e81bb45f",
+    "Songs": [
+        {
+            "title": "Ditto",
+            "artist": "NewJeans",
+            "youtubeLink": "https://www.youtube.com/watch?v=HtbnfBFIJls",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/Ditto | NewJeans.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b273edf5b257be1d6593e81bb45f"
+        },
+        {
+            "title": "Ballroom Extravaganza",
+            "artist": "DPR IAN",
+            "youtubeLink": "https://www.youtube.com/watch?v=ymgpvXVXJPQ",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/Ballroom Extravaganza | DPR IAN.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b2738ac536a8b7cdb157509399a7"
+        },
+        {
+            "title": "Die For You",
+            "artist": "The Weeknd",
+            "youtubeLink": "https://www.youtube.com/watch?v=RpyN9pFXUCg",
+            "path": "/Users/ethanrong/Documents/GitHub/spotifyBot/music/master/Die For You | The Weeknd.mp3",
+            "image": "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452"
+        }
+    ]
+}

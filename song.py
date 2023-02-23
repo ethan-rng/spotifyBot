@@ -43,7 +43,6 @@ class Song:
         master = self.getMaster()
 
         # We do this because not all the things matters
-        print(master["Songs"])
         for song in master["Songs"]:
             if Song(self.getSong()) == Song(song):
                 print("True")
