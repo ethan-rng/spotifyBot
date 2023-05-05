@@ -5,9 +5,10 @@ app = Flask(__name__)
 api = Api(app)
 
 
+class Song(Resource):
+    def get
+
+api.add_resource()
+
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-def apiHandler():
-    return None
