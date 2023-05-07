@@ -1,85 +1,79 @@
-from flask import Flask, request
-from flask_cors import CORS
-from flask_restful import Api, Resource, reqparse
+import pickle
 import firebase_admin
 from firebase_admin import firestore, credentials
-import config
-import numpy as np
-import pandas as pd
-import pandas_market_calendars as mcal
-import pickle
+from flask import Flask
+from flask_cors import CORS
+from flask_restful import Api, Resource, reqparse
 
 # $ pip install --upgrade firebase-admin ipython
+# $ pip install --upgrade google-api-python-client
 
 # FLASK API
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
-STOCK = "AAPL"
-# Initiating Pickle Files
-with open("model.pkl", "rb") as model:
-    model = pickle.load(model)
-
-with open("df.pkl", "rb") as df:
-    df = pickle.load(df)
-
 # FIRESTORE DATA-BASE
 cred = credentials.Certificate("config.json")
 firestoreApp = firebase_admin.initialize_app(cred)
-firestore_client = firestore.client()
+firestoreDB = firestore.client()
+
+
+@app.route("/")
+def home():
+    return "Test Worked, Successful Connected to Jankify API"
+
+
+# PLAYLIST RESOURCE
+class Playlist(Resource):
+    db = firestoreDB.collection("playlists")
+
+    def get(self, playlistID):
+        # Connect to Firebase to Retrieve Data
+        doc_ref = Playlist.db.document(playlistID)
+
+        if doc_ref.get().exists:
+            print("Return: " + doc_ref.get().to_dict())
+            return doc_ref.get().to_dict()
+
+        return {"returnCode": 404}, 404
+
+    def post(self, playlistID):
+        # Checks to See if playlist already exists
+        doc_ref = Playlist.db.document(playlistID)
+        if doc_ref.get().exists: return {"returnCode", 401}, 401
+
+        # Connecting to Spotify API
+        .set({"id":playlistID})
+
+        return
+
 
 # Playlist OBJECT
 playlist_put_args = reqparse.RequestParser()
+playlist_put_args.add_argument("youtubeLink", type=str, help="please insert a link", required=True)
+playlist_put_args.add_argument("artist", type=str, help="please insert a link")
 playlist_put_args.add_argument("link", type=str, help="please insert a link")
 
 
-class Playlist(Resource):
-    def get(self, playlistID):
-        return {"sucessCode": playlistID}
-
-    def post(self, playlistID):
-        args = playlist_put_args.parse_args()
-        return {playlistID: args}
+# PLAYLIST SONG
+class Song(Resource):
+    pass
 
 
-def predictFuture(df, model, days):
-    nyse = mcal.get_calendar('NYSE')
-    schedule = nyse.schedule(start_date='today', end_date='2027-12-31')
+# PLAYLIST USER
+class User(Resource):
+    def get(self):
+        pass
 
-    for i in range(days):
-        # Generating New Prediction
-        row = df.shape[0]
-        predictionData = df.drop(["Date", "Close"], axis="columns").iloc[row - 1]
-        newPrediction = model.predict(np.array(predictionData).reshape(1, -1))
-
-        # Adding New Values and appending to df
-        row = df.shape[0]
-        newDf = pd.DataFrame({
-            "Date": schedule.iloc[i].name,
-            "Close": newPrediction,
-            "Prev_Close": df["Close"].iloc[row - 1],
-            "EMA 6": df["Prev_Close"].ewm(span=6).mean().iloc[-1],
-            "EMA 18": df["Prev_Close"].ewm(span=18).mean().iloc[-1],
-            "EMA 60": df["Prev_Close"].ewm(span=60).mean().iloc[-1],
-            "EMA 120": df["Prev_Close"].ewm(span=120).mean().iloc[-1],
-            "EMA 200": df["Prev_Close"].ewm(span=200).mean().iloc[-1],
-            "MACD": df["Prev_Close"].ewm(span=60).mean().iloc[-1] - df["Prev_Close"].ewm(span=6).mean().iloc[-1],
-            "MACD Signal": df["MACD"].ewm(span=9).mean().iloc[-1]
-        })
-
-        df = pd.concat([df, newDf], axis=0)
-    return df
+    def post(self):
+        pass
 
 
-class mlModel(Resource):
-    def get(self, numDays):
-        close = predictFuture(df, model, numDays)["Close"]
-        return {"close":list(close)[-numDays:]}
-
-
-api.add_resource(Playlist, "/playlist/<string:playlistID>")
-api.add_resource(mlModel, "/model/<int:numDays>")
+# ADDING RESOURCES TO API ENDPOINTS
+api.add_resource(Playlist, "/playlist/<string:playlistID>/")
+api.add_resource(Song, "/song/")
+api.add_resource(User, "/user/<string:userID>/")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)

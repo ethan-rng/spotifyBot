@@ -4,7 +4,7 @@ function postPlaylist(){
     let formData = new FormData();
     formData.append("link", "https://youtube.com");
 
-    fetch(url + "/playlist/fffff", {
+    fetch(url + "playlist/", {
         method:"POST",
         body: formData
     })
@@ -13,17 +13,22 @@ function postPlaylist(){
     .catch(error => console.error(error));
 }
 
-function getPlaylist(){
-    fetch(url + "/playlist/21939", {
+// Expect MP3 file back
+function getPlaylist(playlistID){
+    return fetch(url + "playlist/jkkkkkk", {
         method:"GET"
+    }) 
+    .then(response => response.blob())
+    .then(data => {
+        console.log(data);
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
     .catch(error => console.error(error));
 }
 
+
+
 function getRecommender(){
-    return fetch(url + "/model/10", {
+    return fetch(url + "model/10", {
         method:"GET"
     })
     .then(response => response.json())
