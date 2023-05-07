@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, send_file, Response
 from flask_cors import CORS
 from flask_restful import Api, Resource, reqparse
 import firebase_admin
@@ -35,12 +35,12 @@ playlist_put_args.add_argument("link", type=str, help="please insert a link")
 
 
 class Playlist(Resource):
-    def get(self, playlistID):
-        return {"sucessCode": playlistID}
+    def get(self):
+        return send_file("test.mp3", mimetype="audio/mpeg")
 
-    def post(self, playlistID):
+    def post(self):
         args = playlist_put_args.parse_args()
-        return {playlistID: args}
+        return {"HIII": args}
 
 
 def predictFuture(df, model, days):
@@ -74,12 +74,28 @@ def predictFuture(df, model, days):
 
 class mlModel(Resource):
     def get(self, numDays):
+        print("HIIIIII")
         close = predictFuture(df, model, numDays)["Close"]
-        return {"close":list(close)[-numDays:]}
+        return {"close": list(close)[-numDays:]}
 
 
-api.add_resource(Playlist, "/playlist/<string:playlistID>")
+api.add_resource(Playlist, "/playlist/")
 api.add_resource(mlModel, "/model/<int:numDays>")
 
+
+@app.route("/")
+def base():
+    return "hello World"
+
+@app.route("/test")
+def stream():
+    def generate():
+        with open("test.mp3", "rb") as file:
+            data = file.read(1024)
+            while data:
+                yield data
+                data = file.read(1024)
+    return Response(generate(), mimetype="audio/mpeg")
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
