@@ -1,12 +1,12 @@
 import './App.css';
 import {postPlaylist, getPlaylist} from './apiCalls';
 import Tester from './components/tester';
-
+import SideBar from './components/SideBar';
 
 function App() {
   return (
-    <div>
-      <Tester/>
+    <div className="flex">
+      <SideBar />
     </div>
   );
 }

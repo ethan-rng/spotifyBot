@@ -18,3 +18,4 @@ yfinance==2013.7
 scikit-learn==1.2.1
 pandas-market-calendars==4.1.4
 matplotlib==3.7.0
+spotipy~=2.23.0
