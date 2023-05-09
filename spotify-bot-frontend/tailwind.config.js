@@ -1,16 +1,17 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [],
+module.exports = {
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  mode: "jit",
   theme: {
     extend: {
       colors: {
-        primary: "#E2E9D9",
-        secondary: "#EC5174",
+        primary: "#e2e9d9",
+        secondary: "#ec5174",
         gray:{
           400: "#171717",
           300: "#222222",
-          200: "1E1E1E",
-          100: "AAAAAA",
+          200: "1e1e1e",
+          100: "aaaaaa",
         }
       },
       fontFamily: {
