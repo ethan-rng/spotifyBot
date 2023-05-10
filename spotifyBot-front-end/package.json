@@ -1,5 +1,5 @@
 {
-  "name": "spotify-bot-frontend",
+  "name": "jankify-front-end",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
