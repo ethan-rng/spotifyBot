@@ -1,6 +1,5 @@
-import styles from "./styles";
-import { Sidebar, BottomRow, Banner } from "./components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Sidebar, BottomRow, FrontBanner, Playlist, Home, AddPlaylist } from "./components";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => (
   <div className="text-gray-100">
@@ -12,7 +11,16 @@ const App = () => (
     {/* Main Content */}
     <main>
       <div className="relative botton-neg-300 ml-80 mt-7" style={{ marginRight: "65px"}}>
-        <Banner />
+        <FrontBanner />
+
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" Component={ Home } />
+            <Route path="/playlist" Component={ Playlist } />
+            <Route path="/addPlaylist" Component={ AddPlaylist } />
+          </Routes>
+        </BrowserRouter>
+       
       </div>
     </main>
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Banner = () => {
+const FrontBanner = () => {
 
   return (
     <div className='font-sans text-4xl text-primary'>
@@ -10,4 +10,4 @@ const Banner = () => {
   )
 }
 
-export default Banner
+export default FrontBanner

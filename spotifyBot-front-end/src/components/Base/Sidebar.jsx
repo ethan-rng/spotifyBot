@@ -1,22 +1,23 @@
 import React from 'react'
 import { useState } from 'react'; 
-import { close, logo, menu, home, note, addPlaylist } from '../assets';
+import { close, logo, menu, home, note, addPlaylist } from '../../assets';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState('Home');
-  const links = [{"image":home, "tag":"Home"}, {"image":note, "tag":"Playlists"}, {"image":addPlaylist, "tag":"Add Playlist"}]
+  const links = [{"image":home, "tag":"Home", "link":"/"}, {"image":note, "tag":"Playlists", "link":"/playlist"}, {"image":addPlaylist, "tag":"Add Playlist", "link":"/addPlaylist"}]
   
   const Divider = () => <hr className="mt-4 border-primary" />;
 
-  const SidebarItem = (tag , icon, active ) => {
+  const SidebarItem = ({tag , icon, name, active }) => {
     return(
       <>
-       <li className='transition duration-600 hover:bg-primary hover:text-black pt-3 pb-3'>
-          <a href='#' onClick={ () => (setActiveLink(tag)) } className="hover:text-black">
+      <a href={ name } onClick={ () => (setActiveLink(tag)) } className="hover:text-black">
+        <li className='transition duration-600 hover:bg-primary hover:text-black pt-3 pb-3'>
             <img src={ icon } className="inline-block mr-4 ml-3 w-10 l-10"></img>
             <span className="inline-block align-middle text-2x1">{ tag }</span>
-          </a>
         </li>
+      </a>
       </>
     )
   }
@@ -39,7 +40,15 @@ const Sidebar = () => {
             </div>
 
             <div> 
-              { links.map((link, index) => (SidebarItem(link["tag"], link["image"], activeLink))) }
+              { links.map((link, index) => (
+                <SidebarItem
+                  key={ link["tag"] }
+                  tag={ link["tag"] }
+                  icon={ link["image"] }
+                  name={ link["link"] }
+                  active={ activeLink }
+                />
+               )) }
             </div>
           </ul>  
       </nav>
