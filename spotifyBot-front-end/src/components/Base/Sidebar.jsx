@@ -23,7 +23,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="bg-gray-300 fixed top-0 left-0 h-screen w-300 flex flex-col shadow-lg">
+    <div className="bg-gray-300 z-10 fixed top-0 left-0 h-screen w-300 flex flex-col shadow-lg">
       <nav className='m-5'>
         <ul>
             <div className='flex flex-row mb-2 mt-2'>

@@ -29,14 +29,17 @@ function Tester() {
     }
     return(
         <div>
+            <h1 className="text-4xl mt-4 text-secondary">
+                TESTING SUITE
+            </h1>
             <div id="playlistRetierval">
                 <br/>
                 // Playlist Content
                 <br/>
-                <button onClick={postPlaylist}>
+                <button className="px-5 py-2 bg-primary m-4 transition duration-1000 hover:bg-secondary" onClick={postPlaylist}>
                 Click to Test POST
                 </button>
-                <button onClick={ getPlaylist }>
+                <button className="px-5 py-2 bg-primary m-4 transition duration-1000 hover:bg-secondary" onClick={ getPlaylist }>
                 Click to Test GET
                 </button>
 
@@ -47,10 +50,10 @@ function Tester() {
                 <br/>
                 // Download Content
                 <br/>
-                <button onClick={getPlaylist}>
+                <button className="px-5 py-2 bg-primary m-4 transition duration-1000 hover:bg-secondary" onClick={getPlaylist}>
                 Click to Test GET
                 </button>
-                <button onClick={getPlaylist}>
+                <button className="px-5 py-2 bg-primary m-4 transition duration-1000 hover:bg-secondary" onClick={getPlaylist}>
                 Click to Test GET
                 </button>
             </div> 
@@ -59,11 +62,11 @@ function Tester() {
                 <br/>
                 // Recommendation System
                 <br/>
-                <button onClick={handleGetRecommender}>
+                <button className="px-5 py-2 bg-primary m-4 transition duration-1000 hover:bg-secondary" onClick={handleGetRecommender}>
                 Click to Test GET
                 </button>
 
-                <button onClick={() => {setPredict("")}}>
+                <button className="px-5 py-2 bg-primary m-4 transition duration-1000 hover:bg-secondary" onClick={() => {setPredict("")}}>
                     Click to Clear
                 </button>
 

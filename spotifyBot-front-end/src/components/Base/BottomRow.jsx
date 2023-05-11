@@ -15,7 +15,7 @@ const BottomRow = () => {
 
     const BottomButton = ({icon, text}) => {
         return (
-        <div>
+        <div className='z-10'>
             { text === "pause" ? (
                 <button 
                     onClick={ handlePlayPause }
