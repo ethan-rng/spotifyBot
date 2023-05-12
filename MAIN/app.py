@@ -55,7 +55,7 @@ class Playlist(Resource):
                                                        redirect_uri="http://localhost:9000",
                                                        scope="user-read-recently-played"))
         JSONResponse = sp.playlist(playlistID)
-
+        print(JSONResponse)
         # Filtering Spotify API Response and Upload to Firestore
         """
         uri => 
@@ -77,7 +77,7 @@ class Playlist(Resource):
             "title": JSONResponse["name"],
             "link": [],
             "image": JSONResponse["images"][0]["url"],
-            "songs": SpotifyScraper(JSONResponse)
+            #"songs": SpotifyScraper(JSONResponse)
         }
 
 

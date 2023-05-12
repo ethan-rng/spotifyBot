@@ -1,5 +1,5 @@
 import { Sidebar, BottomRow, FrontBanner, Playlist, Home, AddPlaylist, 
-  Tester, SidePlayer, MusicPlayer } from "./components";
+  Tester, SidePlayer, MusicPlayer, SoloPlaylist } from "./components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => (
@@ -13,6 +13,7 @@ const App = () => (
           <Routes>
             <Route path="/" Component={ Home } />
             <Route path="/playlist" Component={ Playlist } />
+            <Route path="/playlist/:playlistID" Component={ SoloPlaylist } />
             <Route path="/addPlaylist" Component={ AddPlaylist } />
             <Route path="/test" Component={ Tester } />
           </Routes>
