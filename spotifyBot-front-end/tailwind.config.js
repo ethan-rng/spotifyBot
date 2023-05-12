@@ -20,7 +20,20 @@ module.exports = {
       },
       transitionDuration: { 
         600: "600ms",
-      }
+      },
+      width: {  
+        '300-custom': '260px',
+      },
+      height: { 
+        '300-custom': '300px',
+      },
+      margin: {
+        '300-custom': '260px',
+      },
+      gridTemplateColumns: {  
+        player: '85px repeat(10, minmax(0, 1fr)) 85px',
+        playlist: 'repeat(6, minmax(0, 1fr))',
+      },
     },
     screens: {
       xs: "480px",

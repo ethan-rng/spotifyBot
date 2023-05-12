@@ -15,7 +15,7 @@ const BottomRow = () => {
 
     const BottomButton = ({icon, text}) => {
         return (
-        <div className='z-10'>
+        <div>
             { text === "pause" ? (
                 <button 
                     onClick={ handlePlayPause }
@@ -35,14 +35,22 @@ const BottomRow = () => {
     }
 
     return (
-        <div className="bg-gray-200 fixed bottom-0 left-0 w-screen flex justify-center">
-           { links.map((link, index) => (
-            <BottomButton 
-                key={ link["tag"] }
-                icon={ link["image"] }
-                text={ link["tag"] }
-            />            
-            )) }
+        <div className="bg-gray-200 fixed bottom-0 left-0 w-screen flex flex-col z-20">
+            <div className="flex flex-row  items-center">
+                <input 
+                    className='ml-300-custom'
+                
+                />
+            </div>
+            <div className='flex flex-row justify-center items-center'>
+                { links.map((link, index) => (
+                <BottomButton 
+                    key={ link["tag"] }
+                    icon={ link["image"] }
+                    text={ link["tag"] }
+                />            
+                )) }
+            </div>
         </div>
   );
 };

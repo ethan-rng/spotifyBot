@@ -1,4 +1,5 @@
-import { Sidebar, BottomRow, FrontBanner, Playlist, Home, AddPlaylist, Tester, SidePlayer } from "./components";
+import { Sidebar, BottomRow, FrontBanner, Playlist, Home, AddPlaylist, 
+  Tester, SidePlayer, MusicPlayer } from "./components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => (
@@ -23,7 +24,7 @@ const App = () => (
     {/* Base Content */}
     <Sidebar />
     <SidePlayer />
-
+    <MusicPlayer />
     <BottomRow />
 
     
