@@ -38,7 +38,7 @@ const BottomRow = () => {
         <div className="bg-gray-200 fixed bottom-0 left-0 w-screen flex flex-col z-20">
             <div className="flex flex-row  items-center">
                 <input 
-                    className='ml-300-custom'
+                    className='bg-gray-200'
                 
                 />
             </div>

@@ -10,9 +10,10 @@ const SidePlayer = () => {
                 className="w-300-custom l-300-custom"
             >
             </img>        
-
-            <p className='m-10'>
-                asfdasdfasfasdf
+                
+            <p className='m-10 text-center text-white'>
+                Rick Ashely <br/>
+                - Never Gonna Give You Up
             </p>
         </div>
   )
