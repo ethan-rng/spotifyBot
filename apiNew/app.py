@@ -1,10 +1,13 @@
+from flask import Flask
+from flask_restful import Api
 from flask_restful import Resource
 from sqlalchemy import text
-from database import SongDB, PlaylistDB, ArtistDB, app, api, db
+from database import SongDB, PlaylistDB, ArtistDB
 from spotifyScraper import spotifyScraper as scaper
 
-""" TESTER HOME PAGE"""
-
+""" TESTER HOME PAGE + BOILERPLATE """
+app = Flask(__name__)
+api = Api(app)
 
 @app.route("/")
 def home():
