@@ -1,3 +1,0 @@
-spotifyClientID = ""
-spotifyClientSecret = ""
-youtubeAPI = "hi"
