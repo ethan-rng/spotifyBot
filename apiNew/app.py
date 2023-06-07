@@ -1,86 +1,90 @@
-from apiKeys import *
-import spotipy
-from spotipy.oauth2 import SpotifyOAuth
-import os
+from flask_restful import Resource
+from sqlalchemy import text
+from database import SongDB, PlaylistDB, ArtistDB, app, api, db
+from spotifyScraper import spotifyScraper as scaper
 
-from flask import Flask, request, send_file, Response, render_template, url_for, redirect, jsonify
-# from flask_cors import CORS
-from flask_restful import Api, Resource, reqparse
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-
-from sqlalchemy.sql import func
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
+""" TESTER HOME PAGE"""
 
 
-""" 
-    DEFAULT FLASK BOILERPLATE + TESTING HOMEPAGE 
-"""
-app = Flask(__name__)
-# CORS(app)
-api = Api(app)
-
-Base = declarative_base()
-BASEDIR = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASEDIR, 'songDatabase.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-""" 
-    Defining Five (5) Primary Resources:
-        - Song
-        - Playlist
-        - Artist
-        - PlaylistSongs
-        - ArtistSongs 
-"""
+@app.route("/")
+def home():
+    return {"message": "connection working"}
 
 
-class Song(db.Model):
-    __tablename__ = "song"
-    id = db.Column(db.String(22), primary_key=True)
-    title = db.Column(db.String(100))
-    artistID = db.Column(db.String(22))
-    imageLink = db.Column(db.String(2048))
-    youtubeLink = db.Column(db.String(2048), unique=True)
-    addedAt = created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
-    duration = db.column(db.Integer)
-    song = db.column(db.LargeBinary, nullable=False)
+""" DEFINING API RESOURCES """
+class Song(Resource):
+    def get(self, songID):
+        if len(songID) != 22:
+            return {"message": "Not a valid songID"}, 400
+        responseJSON = {}
 
-class Playlist(db.Model):
-    __tablename__ = "playlist"
-    id = db.Column(db.String(22), primary_key=True)
-    title = db.Column(db.String(100))
-    owner = db.Column(db.String(100))
-    imageLink = db.Column(db.String(2048))
+        SongDB.query("SELECT * ")
 
 
-class Artist(db.Model):
-    __tablename__ = "artist"
-    id = db.Column(db.String(22), primary_key=True)
-    name = db.Column(db.String(100))
-    imageLink = db.Column(db.String(2048))
+        return responseJSON
+
+    def delete(self, songID):
+        pass
 
 
-class PlaylistSongs(db.Model):
-    __tablename__ = "playlistSongs"
-    playlistID =
-    songID =
-    location =
+class Playlist(Resource):
+    def get(self, playlistID):
+        # CHECKING IF VALID ID
+        if len(playlistID) != 22:
+            return {"message": "Not a valid playlistID"}, 400
+        responseJSON = {}
+
+        PlaylistDB.query("SELECT * FROM ")
+        return responseJSON, 200
+
+    def post(self, playlistID):
+        # CHECKING IF VALID ID OR ALREADY EXIST
+        if len(playlistID) != 22:
+            return {"message": "Not a valid playlistID"}, 400
+        elif PlaylistDB.query.get_or_404(playlistID) != 404:
+            return {"message": "Resource already exists"}, 409
+
+        # DATA SCRAPING
+        webScraper = scaper(playlistID)
+        playlistObj = webScraper.getPlaylistData()
+        songs = []
+        artists = []
+
+        # POSTING TO SQL DATABASE
+        db.session.add(playlistObj)
+        for songObj in songs:
+            db.session.add(songObj)
+        for artistObj in artists:
+            db.session.add()
+
+        db.session.commit()
+
+        return {"message": "posted successfully"}, 200
 
 
-class ArtistSongs(db.Model):
-    __tablename__ = "artistSongs"
-    artistID =
-    songID =
-    playlistID =
-    __table_args__ = (
-        db.PrimaryKeyContraint("artistID", "songID", "playlistID")
-    )
+class Artist(Resource):
+    def get(self, artistID):
+        if len(artistID) != 22:
+            return {"message": "Not a valid playlistID"}, 400
+        responseJSON = {}
+
+        # SQL LOOKUP
+        result = db.session.execute(text("SELECT * FROM artists WHERE id = '2222222222222222222222';")).fetchall()
+        print("result: " + str(result))
+        responseJSON["message"] = str(result)
+        return responseJSON, 200
+
+    def delete(self, artistID):
+        pass
+
+    def post(self, artistID):
+        db.session.add(ArtistDB(artistID, "boi", "dope"))
+        db.session.commit()
 
 
-db.create_all()
+api.add_resource(Song, "/song/<string:songID>")
+api.add_resource(Playlist, "/playlist/<string:playlistID>")
+api.add_resource(Artist, "/artist/<string:artistID>")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=3000)
