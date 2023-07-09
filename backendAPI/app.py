@@ -2,8 +2,8 @@ from flask import Flask
 from flask_restful import Api
 from flask_restful import Resource
 from sqlalchemy import text
-from database import SongDB, PlaylistDB, ArtistDB
-from spotifyScraper import spotifyScraper as scaper
+from api.spotifyScraper.database import SongDB, PlaylistDB, ArtistDB, Session
+from api.spotifyScraper import spotifyScraper as Scaper
 
 """ TESTER HOME PAGE + BOILERPLATE """
 app = Flask(__name__)
@@ -44,23 +44,11 @@ class Playlist(Resource):
         # CHECKING IF VALID ID OR ALREADY EXIST
         if len(playlistID) != 22:
             return {"message": "Not a valid playlistID"}, 400
-        elif PlaylistDB.query.get_or_404(playlistID) != 404:
-            return {"message": "Resource already exists"}, 409
 
         # DATA SCRAPING
-        webScraper = scaper(playlistID)
+        webScraper = Scaper(playlistID)
         playlistObj = webScraper.getPlaylistData()
-        songs = []
-        artists = []
 
-        # POSTING TO SQL DATABASE
-        db.session.add(playlistObj)
-        for songObj in songs:
-            db.session.add(songObj)
-        for artistObj in artists:
-            db.session.add()
-
-        db.session.commit()
 
         return {"message": "posted successfully"}, 200
 
@@ -72,7 +60,7 @@ class Artist(Resource):
         responseJSON = {}
 
         # SQL LOOKUP
-        result = db.session.execute(text("SELECT * FROM artists WHERE id = '2222222222222222222222';")).fetchall()
+        result = Session.execute(text("SELECT * FROM artists WHERE id = '2222222222222222222222';")).fetchall()
         print("result: " + str(result))
         responseJSON["message"] = str(result)
         return responseJSON, 200
@@ -81,7 +69,7 @@ class Artist(Resource):
         pass
 
     def post(self, artistID):
-        db.session.add(ArtistDB(artistID, "boi", "dope"))
+        Session.add(ArtistDB(artistID, "boi", "dope"))
         db.session.commit()
 
 

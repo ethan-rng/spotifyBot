@@ -27,8 +27,8 @@ dist-ssr
 apiNew/apiKeys
 apiOld/config.py
 config.py
-apiNew/config.py
-apiNew/spotifyScraper/config.py
+backendAPI/spotifyScraper/config.py
+backendAPI/spotifyScraper/config.py
 node_modules
 node_modules
 node_modules
