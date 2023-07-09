@@ -1,5 +1,12 @@
-from . import sp
-from ..database import ArtistDB, SongDB, PlaylistDB
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+import config
+
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=config.spotifyClientID,
+                                               client_secret=config.spotifyClientSecret,
+                                               redirect_uri="http://localhost:9000",
+                                               scope="user-read-recently-played"))
+
 
 class SpotifyScraper:
     def __init__(self, playlistID):
@@ -11,9 +18,6 @@ class SpotifyScraper:
         JSONResponse = sp.playlist(self.playlistID)
         print(JSONResponse)
 
-        title =
-        owner =
-        imageLink =
         """ 
         PLAYLIST
             ID
@@ -33,5 +37,4 @@ class SpotifyScraper:
 
 
 
-    def g
 

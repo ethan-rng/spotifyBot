@@ -2,8 +2,8 @@ import React from 'react'
 
 const AddPlaylist = () => {
   return (
-    <div className='mt-8 flex flex-col'>
-      <p className='text-secondary mb-4 text-4xl font-semibold underline'>
+    <div className='flex flex-col'>
+      <p className='header-title'>
         Insert Your Playlist Links Here:
       </p>
       <input className='pb-40 bg-primary rounded' />

@@ -3,7 +3,7 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, Column, String, DateTime, Integer, LargeBinary, ForeignKey
 from sqlalchemy.sql import func
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 import os
 
 """  DEFAULT SQL-ALCHEMY BOILERPLATE """
@@ -14,8 +14,6 @@ engine = create_engine(connection_string, echo=True)
 Session = sessionmaker()
 
 """  DEFINING PRIMARY RESOURCES/TABLES """
-
-
 class SongDB(Base):
     __tablename__ = "songs"
     id = Column(String(22), primary_key=True)
