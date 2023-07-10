@@ -1,26 +1,25 @@
 import React from 'react';
-import { getPlaylist } from '../../../ApiCalls'
 import { pauseButton, playButton, nextButton, prevButton, shuffleButton, repeatButton } from '../../../assets';
+import { Error, Loader, Footer } from "../../Utils"
+import { useGetPlaylistQuery } from "../../../redux/services/flaskCOre";
 import { useState } from 'react';
 
 
 const SoloPlaylist = (props) => {
+  const [isPaused, setIsPaused] = useState(true);  
   const url = window.location.href;
   const playlistId = url.substring(url.length - 22);
-  const playlistData = getPlaylist(playlistId);
-  const numSongs = playlistData.Songs.length;
-  const [isPaused, setIsPaused] = useState(true);
-  
-  // Individual Song Component
-  const Song = ({ songData}) => {
-    return (
-      <div>asdf</div>
-    )
-  }
+  const { data: playlistData, isFetching, error } = useGetPlaylistQuery({playlistId});
 
+  console.log(playlistData)
+
+  const numSongs = playlistData.Songs.length;
+  console.log(playlistData)
+  if (isFetching) return <Loader title="Loading songs..." />;
+  if (error) return <Error />;
 
   // Error Page For When Invalid Playlist ID is Given
-  if (playlistId.indexOf("/") !== -1 || playlistData === 404) {
+  if (data.indexOf("/") !== -1 || data === 404) {
     return (
       <div className="flex flex-col h-screen items-center justify-center bg-gray-100 mt-8">
         <h1 className="text-4xl font-bold mb-4 text-gray-800">Error 404: Page Not Found</h1>
@@ -41,18 +40,18 @@ const SoloPlaylist = (props) => {
     return (
       <div className='mt-3'>
         <div className='bg-secondary p-4 flex flex-row rounded-md'>
-          <a href={ playlistData.Link }>
+          <a href={ data.Link }>
             <img 
-              src={ playlistData.Image }
+              src={ data.Image }
               className='w-64 h-64 object-cover top-0 rounded mr-8'
             />
           </a>
 
           <div className='text-white flex flex-row'>
             <div className='flex flex-col'>
-              <a href={ playlistData.Link }>
+              <a href={ data.Link }>
                 <h1 className='text-6xl semibold mt-3 mb-3 underline'>
-                  { playlistData.Title }
+                  { data.Title }
                 </h1>
               </a>
 
@@ -73,9 +72,9 @@ const SoloPlaylist = (props) => {
                 <div className='flex flex-col'>
                   <div> Playlist ID: { playlistId } </div>
                   <div> Number of Tracks: { numSongs } </div>
-                  <a href={ playlistData.Owner.Link } className='hover:text-primary underline'>
+                  <a href={ data.Owner.Link } className='hover:text-primary underline'>
                     <p>
-                      By: { playlistData.Owner.Name }
+                      By: { data.Owner.Name }
                     </p>
                   </a>
                 </div>

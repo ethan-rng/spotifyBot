@@ -7,7 +7,6 @@ import Home from "./Screens/Home/Home";
 import Playlist from "./Screens/Playlist/Playlist";
 import AddPlaylist from "./Screens/AddPlaylist/AddPlaylist";
 import Tester from "./Screens/Tester";
-import MusicPlayer from "./MusicPlayer";
 import SoloPlaylist from "./Screens/Playlist/SoloPlaylist";
 
 export {
@@ -20,6 +19,5 @@ export {
   Playlist,
   AddPlaylist,
   Tester,
-  MusicPlayer,
   SoloPlaylist,
 };

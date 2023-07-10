@@ -16,6 +16,8 @@ import nextButton from "./BottomRow/nextButton.svg";
 import repeatButton from "./BottomRow/repeatButton.svg";
 import shuffleButton from "./BottomRow/shuffleButton.svg";  
 
+import loader from "./UtilAssets/loader.svg";
+
 export {
   logo,
   menu,
@@ -34,5 +36,7 @@ export {
   nextButton, 
   repeatButton,
   shuffleButton,
+
+  loader,
 }
   

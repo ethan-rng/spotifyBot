@@ -28,7 +28,7 @@ const Sidebar = () => {
         <ul>
             <div className='flex flex-row mb-2 mt-2'>
               <li className='inline'>
-                <a href='#'>
+                <a href='/'>
                   <img 
                     src={ logo }
                     className="inline-block mr-2 w-10 h-30"
